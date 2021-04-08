@@ -18,12 +18,13 @@ body {
     color: #75B79E;
     text-align: center;
 }
-.cards {
+.cardsarea {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     width: 75%;
+    height: auto;
 }
 .card {
     width: 117px;

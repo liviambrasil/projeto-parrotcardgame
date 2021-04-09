@@ -44,6 +44,10 @@ body {
 
 }
 
+.changeimg {
+    transform:rotateY(180deg);
+} 
+
 @media (max-width: 600px) {
 
 .top h1 {

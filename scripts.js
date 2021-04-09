@@ -1,5 +1,6 @@
 let cardsnumber = prompt("Com quantas cartas você gostaria de jogar?");
-let cardsarea = document.querySelector(".cardsarea")
+let cardsarea = document.querySelector(".cardsarea");
+let secondimgcard = null;
 
 while (cardsnumber%2 | cardsnumber<4 | cardsnumber>14) {
     cardsnumber = prompt("Com quantas cartas você gostaria de jogar?")
@@ -16,25 +17,34 @@ let img = [];
 
 img.sort(comparador);
 
+let arrcards = [];
 
-for (i=0; i<cardsnumber/2; i++){
+for (let i = 0; i < cardsnumber/2 ; i++) {       
+    arrcards.push(img[i]); 
+    arrcards.push(img[i]);           
+}
+
+arrcards.sort(comparador)
+
+
+for (i=0; i<cardsnumber; i++){
     cardsarea.innerHTML += 
     `<div class="card"> 
-        <img onclick="changeimg(this)" id="${img[i]}" src="img/front.png" alt="papagaio da frente da carta"> </div>`
+        <img onclick="changeimg(this)" id="${arrcards[i]}" src="img/front.png" alt="papagaio da frente da carta"> </div>`
 }
 
 let card = document.querySelector(".card");
 
 function changeimg(imgcard) {
+    imgcard.classList.toggle("imgchange");
     imgcard.setAttribute('src', imgcard.id);
 }
 
-function newcardsarea () {
-    cardsarea.innerHTML += `${cardsarea.innerHTML}`;
+if (secondimgcard == null) {
+    secondimgcard = imgcard;
 }
 
-newcardsarea ();
-
+let imgcard = document.querySelector(".card img")
 function comparador() { 
 	return Math.random() - 0.5;
 }

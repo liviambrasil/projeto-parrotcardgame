@@ -63,7 +63,7 @@ if (cardPosition.length == 2) {
         cardPosition = [];
         cardsNumber -= 2;
         if (cardsNumber==0) {
-            setTimeout("alert, (`Você ganhou em ${counter} jogadas!");
+            alert(`Você ganhou em ${counter} jogadas!`);
         }
     }
 }

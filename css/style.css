@@ -18,7 +18,7 @@ body {
     color: #75B79E;
     text-align: center;
 }
-.cardsarea {
+.cardsArea {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -44,7 +44,7 @@ body {
 
 }
 
-.changeimg {
+.changeImg {
     transform:rotateY(180deg);
 } 
 

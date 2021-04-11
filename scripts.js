@@ -1,9 +1,11 @@
-let cardsnumber = prompt("Com quantas cartas você gostaria de jogar?");
-let cardsarea = document.querySelector(".cardsarea");
-let secondimgcard = null;
+let cardsNumber = prompt("Com quantas cartas você gostaria de jogar?");
+let cardsArea = document.querySelector(".cardsArea");
+let cardSelected = [];
+let cardPosition = [];
+let counter = 0;
 
-while (cardsnumber%2 | cardsnumber<4 | cardsnumber>14) {
-    cardsnumber = prompt("Com quantas cartas você gostaria de jogar?")
+while (cardsNumber%2 !== 0 | cardsNumber<4 | cardsNumber>14) {
+    cardsNumber = prompt("Com quantas cartas você gostaria de jogar?")
 }
 
 let img = [];
@@ -17,34 +19,67 @@ let img = [];
 
 img.sort(comparador);
 
-let arrcards = [];
+let arrCards = [];
 
-for (let i = 0; i < cardsnumber/2 ; i++) {       
-    arrcards.push(img[i]); 
-    arrcards.push(img[i]);           
+for (let i = 0; i < cardsNumber/2 ; i++) {       
+    arrCards.push(img[i]); 
+    arrCards.push(img[i]);           
 }
 
-arrcards.sort(comparador)
+arrCards.sort(comparador)
 
 
-for (i=0; i<cardsnumber; i++){
-    cardsarea.innerHTML += 
+for (i=0; i<cardsNumber; i++){
+    cardsArea.innerHTML += 
     `<div class="card"> 
-        <img onclick="changeimg(this)" id="${arrcards[i]}" src="img/front.png" alt="papagaio da frente da carta"> </div>`
+        <img onclick="changeImg(this)" id="card${i}" alt="${arrCards[i]}" src="img/front.png" alt="papagaio da frente da carta"> </div>`
 }
 
 let card = document.querySelector(".card");
 
-function changeimg(imgcard) {
-    imgcard.classList.toggle("imgchange");
-    imgcard.setAttribute('src', imgcard.id);
+
+function changeImg(imgCard) {
+    if (cardSelected.length < 2) {
+        imgCard.setAttribute('src', imgCard.alt);
+        imgCard.setAttribute('onclick', "");
+        cardSelected.push(imgCard.alt);
+        cardPosition.push(imgCard.id);
+        console.log(cardSelected);
+        compare ();
+        counter += 1;
+}
 }
 
-if (secondimgcard == null) {
-    secondimgcard = imgcard;
+
+
+function compare () {
+
+if (cardPosition.length == 2) {
+    if (cardSelected[0] != cardSelected[1]) {
+        setTimeout(untap , 1000);
+    }
+    else {
+        cardSelected = [];
+        cardPosition = [];
+        cardsNumber -= 2;
+        if (cardsNumber==0) {
+            setTimeout("alert, (`Você ganhou em ${counter} jogadas!");
+        }
+    }
 }
 
-let imgcard = document.querySelector(".card img")
-function comparador() { 
+function untap () {
+    for (i = 0; i<2 ; i++) {
+        let firstCard = document.getElementById(cardPosition[i]);
+        firstCard.setAttribute('src', "img/front.png");
+        firstCard.setAttribute('onclick', "changeImg(this)");
+    }
+    console.log(cardPosition);
+    cardSelected = [];
+    cardPosition = [];
+}
+}
+
+function comparador() {
 	return Math.random() - 0.5;
 }
